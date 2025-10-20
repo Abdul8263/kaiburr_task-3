@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  backend:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATA_MONGODB_URI=mongodb+srv://abdulkhadar0248_db_user:YZ9UPmtxEEJKuaeZ@kaiburr.sgookef.mongodb.net/taskdb?retryWrites=true&w=majority
+    networks:
+      - task-manager-network
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    networks:
+      - task-manager-network
+
+networks:
+  task-manager-network:
+    driver: bridge
